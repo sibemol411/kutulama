@@ -1,4 +1,6 @@
 <!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <title>Kutulama kartı</title><style>
 *{box-sizing:border-box}body{margin:0;background:#fff;font-family:Arial,Helvetica,sans-serif;color:#1d2433}
 .k{max-width:400px;margin:0 auto;padding:8px 10px 12px}
@@ -33,7 +35,7 @@ function saatDoldur(){const m=g("vardiya").match(/(\d{1,2})[:.]?\d*\s*-\s*(\d{1,
 const g=id=>document.getElementById(id).value.trim();
 function metin(){let s=`KUTULAMA ${g("tarih").split("-").reverse().join(".")} - Jysk\nVardiya: ${g("vardiya")||"-"}\n`;K.forEach((k,i)=>{const n=g("k"+i),y=g("y"+i);if(n||y)s+=`${k[0]}: ${n||0}${y?" (Revize "+y+")":""}\n`});
 s+=`Dokuma: ${g("dok")||"-"} m²\nKonfeksiyon: ${g("konf")||"-"} m²\nStok: ${g("stok")||"-"} m²\nÇalışan: ${g("kisi")||"-"}\nSaat: ${g("saat")||"-"}\nDünden kalan: ${g("dun")||"-"}\nAçıklama: ${g("aciklama")||"-"}`;return s}
-{const d=new Date();d.setDate(d.getDate()-1);while(d.getDay()===0)d.setDate(d.getDate()-1);tarih.value=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+(function(){const el=document.getElementById("tarih");const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-1);while(d.getDay()===0)d.setDate(d.getDate()-1);const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),gun=String(d.getDate()).padStart(2,"0");el.value=y+"-"+m+"-"+gun;el.defaultValue=el.value;})();
 function kopyala(){const t=metin(),bitti=()=>{ok.textContent="Metin kopyalandı. WhatsApp'ta gruba yapıştırın.";};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(bitti,()=>eski(t))}else eski(t);function eski(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");bitti()}catch(e){ok.textContent="Kopyalanamadı"}a.remove()}}
 saatDoldur();
 </script></body></html>
