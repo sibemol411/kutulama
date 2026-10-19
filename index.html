@@ -15,24 +15,25 @@ button.c{background:#e5e9ef;color:#1d2433;font-size:16px;padding:10px;margin-top
 <h1>Kutulama · Jysk</h1>
 <div class="row d"><span>Tarih</span><input id="tarih" type="date"></div>
 <div class="row d"><span>Vardiya</span><input id="vardiya" placeholder="08:00-20:00" oninput="saatDoldur()"></div>
-<div class="cap"><span style="width:52px">yarım</span><span style="width:72px">kutu</span></div>
+<div class="cap"><span style="width:52px">Revize</span><span style="width:72px">kutu</span></div>
 <div id="liste"></div><div class="sep"></div>
 <div class="row"><span>Dokuma üretimi (m²)</span><input id="dok" inputmode="decimal"></div>
 <div class="row"><span>Konfeksiyon üretimi (m²)</span><input id="konf" inputmode="decimal"></div>
 <div class="row"><span>Stok (m²)</span><input id="stok" inputmode="decimal"></div>
 <div class="row"><span>Çalışan sayısı</span><input id="kisi" inputmode="numeric"></div>
 <div class="row"><span>Çalışma saati</span><input id="saat" inputmode="numeric"></div>
+<div class="row"><span>Dünden kalan</span><input id="dun" inputmode="numeric" placeholder="adet"></div>
+<div class="row d"><span>Açıklama</span><input id="aciklama" style="width:220px;text-align:left" placeholder="kısa not"></div>
 <button onclick="location.href='https://wa.me/?text='+encodeURIComponent(metin())">WhatsApp'a gönder</button>
 <button class="c" onclick="kopyala()">Metni kopyala</button><div id="ok"></div>
 </div><script>
-const K=[["BELLA 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["BELLA 160X230 30 LU JYSK","160x0230","PALET_26",30],["BELLA 200X300 25 Lİ","200x0300","PALET_71",25],["HELSİNKİ 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["HELSİNKİ 160230 35'Lİ JYSK","160x0230","PALET_26",35],["HELSİNKİ SİYAH 140X200 JYSK 35 Lİ","140x0200","PALET_35",35],["HELSİNKİ SİYAH 160X230 JYSK 35 Lİ","160x0230","PALET_12",35],["KOS 140X200 30 LU JYSK","140x0200","PALET_35",30],["KOS 160X230 24 LÜ JYSK","160x0230","PALET_26",24],["LA PALMA 80X200 54 LÜ JYSK","080x0200","PALET_46",54],["LAPALMA 80X200 72 Lİ JYSK","080x0200","PALET_46",72],["MAESTRO 140X200 48 Lİ JYSK","140x0200","PALET_35",48],["MAESTRO 160X230 48 Lİ JYSK","160x0230","PALET_26",48],["VİLLEPAL - 230x160 - 30 LU","230x0160","PALET_53",30],["VİLLEPAL 160X230 A ÖZEL 200 lü","160x0230","PALET_12",200]]; /* [Kutu Name, Ebat adı, Kutu Kodu (yalnız veri), halı/kutu] */
-
-liste.innerHTML=K.map((k,i)=>`<div class="row"><span>${k[0]}</span><div class="bx"><input class="y" id="y${i}" inputmode="numeric" pattern="[0-9]*" title="dünden kalan yarım kutu"><input id="k${i}" inputmode="numeric" pattern="[0-9]*"></div></div>`).join("");
+const K=[["BELLA 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["BELLA 160X230 30 LU JYSK","160x0230","PALET_26",30],["BELLA 200X300 25 Lİ","200x0300","PALET_71",25],["HELSİNKİ 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["HELSİNKİ 160230 35'Lİ JYSK","160x0230","PALET_26",35],["KOS 140X200 30 LU JYSK","140x0200","PALET_35",30],["KOS 160X230 24 LÜ JYSK","160x0230","PALET_26",24],["MAESTRO 140X200 48 Lİ JYSK","140x0200","PALET_35",48],["MAESTRO 160X230 48 Lİ JYSK","160x0230","PALET_26",48],["VİLLEPAL - 230x160 - 30 LU","230x0160","PALET_53",30]]; /* [Ad, Ebat, Kutu Kodu, hali/kutu] */
+liste.innerHTML=K.map((k,i)=>`<div class="row"><span>${k[0]}</span><div class="bx"><input class="y" id="y${i}" inputmode="numeric" pattern="[0-9]*" title="Revize (bozuk/eksik kutu)"><input id="k${i}" inputmode="numeric" pattern="[0-9]*" title="Kutu"></div></div>`).join("");
 function saatDoldur(){const m=g("vardiya").match(/(\d{1,2})[:.]?\d*\s*-\s*(\d{1,2})/);if(m){saat.value=((+m[2]-+m[1]+24)%24)||24}}
 const g=id=>document.getElementById(id).value.trim();
-function metin(){let s=`KUTULAMA ${g("tarih").split("-").reverse().join(".")} - Jysk\nVardiya: ${g("vardiya")||"-"}\n`;K.forEach((k,i)=>{const n=g("k"+i),y=g("y"+i);if(n||y)s+=`${k[0]}: ${n||0}${y?" (yarım "+y+")":""}\n`});
-s+=`Dokuma: ${g("dok")||"-"} m²\nKonfeksiyon: ${g("konf")||"-"} m²\nStok: ${g("stok")||"-"} m²\nÇalışan: ${g("kisi")||"-"}\nSaat: ${g("saat")||"-"}`;return s}
-{const d=new Date();tarih.value=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function metin(){let s=`KUTULAMA ${g("tarih").split("-").reverse().join(".")} - Jysk\nVardiya: ${g("vardiya")||"-"}\n`;K.forEach((k,i)=>{const n=g("k"+i),y=g("y"+i);if(n||y)s+=`${k[0]}: ${n||0}${y?" (Revize "+y+")":""}\n`});
+s+=`Dokuma: ${g("dok")||"-"} m²\nKonfeksiyon: ${g("konf")||"-"} m²\nStok: ${g("stok")||"-"} m²\nÇalışan: ${g("kisi")||"-"}\nSaat: ${g("saat")||"-"}\nDünden kalan: ${g("dun")||"-"}\nAçıklama: ${g("aciklama")||"-"}`;return s}
+{const d=new Date();d.setDate(d.getDate()-1);while(d.getDay()===0)d.setDate(d.getDate()-1);tarih.value=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 function kopyala(){const t=metin(),bitti=()=>{ok.textContent="Metin kopyalandı. WhatsApp'ta gruba yapıştırın.";};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(bitti,()=>eski(t))}else eski(t);function eski(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");bitti()}catch(e){ok.textContent="Kopyalanamadı"}a.remove()}}
 saatDoldur();
 </script></body></html>
