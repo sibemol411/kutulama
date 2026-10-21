@@ -16,12 +16,9 @@ h1{font-size:22px;margin:4px 0 8px;font-weight:800}
 .cell input{flex:1;width:100%;min-width:0;height:100%;font-size:24px;font-weight:800;padding:0 4px 0 0;text-align:right;border:0;outline:0;background:transparent;color:#111;-webkit-appearance:none;appearance:none}
 .cell:focus-within{box-shadow:0 0 0 3px #111}
 .y{background:#fff3c4;border-color:#a67c00!important}.r{background:#ffd0d0;border-color:#b42318!important}.b{background:#c8dbff;border-color:#1d4ed8!important}.v{background:#c6f0d4;border-color:#15803d!important}
-.cell .lb.y,.cap .y{color:#7a5800}.cell .lb.r,.cap .r{color:#9b1c1c}.cell .lb.b,.cap .b{color:#1e40af}.cell .lb.v,.cap .v{color:#166534}
-.cap{position:sticky;top:0;z-index:2;background:#fff;padding:5px 0 5px;border-bottom:3px solid #6b7a8d;margin-top:4px}
-.cap .hc{border-radius:7px;padding:3px 2px;border:2px solid #c5ced9;text-align:center;line-height:1.15;background:#f4f6f9;min-width:0}
-.cap .hc b{display:block;font-size:15px;font-weight:900}
-.cap .hc i{display:block;font-style:normal;font-size:11px;font-weight:700;line-height:1.15}
-.cap .hc.y{background:#fff3c4}.cap .hc.r{background:#ffd0d0}.cap .hc.b{background:#c8dbff}.cap .hc.v{background:#c6f0d4}
+.cell .lb.y{color:#7a5800}.cell .lb.r{color:#9b1c1c}.cell .lb.b{color:#1e40af}.cell .lb.v{color:#166534}
+.leg{font-size:17px;font-weight:800;color:#111;line-height:1.4;padding:8px 0 6px;border-bottom:2px solid #c5ced9}
+.leg b{font-weight:900;background:none!important}.leg .y{color:#7a5800}.leg .r{color:#9b1c1c}.leg .b{color:#1e40af}.leg .v{color:#166534}
 .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px 0 8px;border-bottom:2px solid #c5ced9}
 .mini.two{grid-template-columns:1fr 1fr}
 .mini label{display:flex;flex-direction:column;font-size:14px;font-weight:800;gap:2px;min-width:0}
@@ -36,12 +33,7 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
 </style></head><body><div class="k">
 <h1>Kutulama · Jysk</h1>
 <div class="row d"><span>Tarih</span><input id="tarih" type="date"></div>
-<div class="cap g4">
-  <div class="hc y"><b>R</b><i>Revize<br>kutu</i></div>
-  <div class="hc r"><b>DK</b><i>Dünden kalan<br>kutu</i></div>
-  <div class="hc b"><b>Ö</b><i>Dökme<br>adet</i></div>
-  <div class="hc v"><b>K</b><i>Kutu<br>kutu</i></div>
-</div>
+<div class="leg"><b class="y">R</b> = Revize · <b class="r">DK</b> = Dünden kalan · <b class="b">Ö</b> = Dökme (adet) · <b class="v">K</b> = Kutu</div>
 <div id="liste"></div><div class="sep"></div>
 <div class="mini"><label>Dokuma m²<input id="dok" inputmode="decimal"></label><label>Konfeksiyon m²<input id="konf" inputmode="decimal"></label><label>JYSK Stok m²<input id="stok" inputmode="decimal"></label></div>
 <div class="mini two"><label>Çalışan sayısı<input id="kisi" inputmode="numeric"></label><label>Çalışma saati<input id="saat" inputmode="numeric"></label></div>
