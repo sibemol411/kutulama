@@ -11,14 +11,12 @@ h1{font-size:22px;margin:4px 0 8px;font-weight:800}
 .m{padding:6px 0 7px;border-bottom:2px solid #c5ced9}
 .m .ad{font-size:16.5px;font-weight:800;margin-bottom:5px;line-height:1.2;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.cell{display:flex;align-items:center;min-width:0;height:52px;border:3px solid;border-radius:10px;overflow:hidden}
-.cell .lb{flex:none;font-size:20px;font-weight:900;line-height:1;padding:0 3px 0 5px;pointer-events:none}
-.cell input{flex:1;width:100%;min-width:0;height:100%;font-size:24px;font-weight:800;padding:0 4px 0 0;text-align:right;border:0;outline:0;background:transparent;color:#111;-webkit-appearance:none;appearance:none}
+.cell{display:flex;flex-direction:column;align-items:stretch;min-width:0;height:72px;border:3px solid;border-radius:10px;overflow:hidden;padding:3px 0 0}
+.cell .lb{flex:none;font-size:16px;font-weight:900;line-height:1.1;text-align:center;pointer-events:none;white-space:nowrap}
+.cell input{flex:1;width:100%;min-width:0;height:100%;font-size:30px;font-weight:900;padding:0 2px;text-align:center;border:0;outline:0;background:transparent;color:#111;-webkit-appearance:none;appearance:none}
 .cell:focus-within{box-shadow:0 0 0 3px #111}
 .y{background:#fff3c4;border-color:#a67c00!important}.r{background:#ffd0d0;border-color:#b42318!important}.b{background:#c8dbff;border-color:#1d4ed8!important}.v{background:#c6f0d4;border-color:#15803d!important}
 .cell .lb.y{color:#7a5800}.cell .lb.r{color:#9b1c1c}.cell .lb.b{color:#1e40af}.cell .lb.v{color:#166534}
-.leg{font-size:17px;font-weight:800;color:#111;line-height:1.4;padding:8px 0 6px;border-bottom:2px solid #c5ced9}
-.leg b{font-weight:900;background:none!important}.leg .y{color:#7a5800}.leg .r{color:#9b1c1c}.leg .b{color:#1e40af}.leg .v{color:#166534}
 .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px 0 8px;border-bottom:2px solid #c5ced9}
 .mini.two{grid-template-columns:1fr 1fr}
 .mini label{display:flex;flex-direction:column;justify-content:space-between;line-height:1.2;font-size:14px;font-weight:800;gap:2px;min-width:0}
@@ -33,7 +31,6 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
 </style></head><body><div class="k">
 <h1>Kutulama · Jysk</h1>
 <div class="row d"><span>Tarih</span><input id="tarih" type="date"></div>
-<div class="leg"><b class="y">R</b> = Revize · <b class="r">DK</b> = Dünden kalan · <b class="b">Ö</b> = Dökme (adet) · <b class="v">K</b> = Kutu</div>
 <div id="liste"></div><div class="sep"></div>
 <div class="mini two"><label>JYSK Dokuma m²<input id="dok" inputmode="decimal"></label><label>JYSK Konfeksiyon m²<input id="konf" inputmode="decimal"></label></div>
 <div class="mini two"><label>Çalışan sayısı<input id="kisi" inputmode="numeric"></label><label>Çalışma saati<input id="saat" inputmode="numeric"></label></div>
@@ -43,7 +40,7 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
 </div><script>
 const K=[["BELLA 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["BELLA 160X230 30 LU JYSK","160x0230","PALET_26",30],["BELLA 200X300 25 Lİ","200x0300","PALET_71",25],["HELSİNKİ 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["HELSİNKİ 160230 35'Lİ JYSK","160x0230","PALET_26",35],["KOS 140X200 30 LU JYSK","140x0200","PALET_35",30],["KOS 160X230 24 LÜ JYSK","160x0230","PALET_26",24],["MAESTRO 140X200 48 Lİ JYSK","140x0200","PALET_35",48],["MAESTRO 160X230 48 Lİ JYSK","160x0230","PALET_26",48],["VİLLEPAL - 230x160 - 30 LU","230x0160","PALET_53",30]]; /* [Ad, Ebat, Kutu Kodu, hali/kutu] */
 const cell=(lbCls,lb,id,t)=>`<label class="cell ${lbCls}"><span class="lb ${lbCls}" aria-hidden="true">${lb}</span><input id="${id}" inputmode="numeric" pattern="[0-9]*" title="${t}" aria-label="${t}"></label>`;
-liste.innerHTML=K.map((k,i)=>`<div class="m"><div class="ad">${k[0]}</div><div class="g4">${cell("y","R","y"+i,"Revize (kutu)")}${cell("r","DK","d"+i,"Dünden kalan (kutu)")}${cell("b","Ö","b"+i,"Dökme (adet)")}${cell("v","K","k"+i,"Kutu")}</div></div>`).join("");
+liste.innerHTML=K.map((k,i)=>`<div class="m"><div class="ad">${k[0]}</div><div class="g4">${cell("y","Revize","y"+i,"Revize (kutu)")}${cell("r","Dünden","d"+i,"Dünden kalan (kutu)")}${cell("b","Dökme","b"+i,"Dökme (adet)")}${cell("v","Kutu","k"+i,"Kutu")}</div></div>`).join("");
 const g=id=>document.getElementById(id).value.trim();
 function buyut(t){t.style.height="auto";t.style.height=Math.max(t.scrollHeight+6,0)+"px"}
 function metin(){let s=`KUTULAMA ${g("tarih").split("-").reverse().join(".")} - Jysk\n`;K.forEach((k,i)=>{const n=g("k"+i),y=g("y"+i),d=g("d"+i),b=g("b"+i),e=[];if(y)e.push("Revize "+y);if(d)e.push("Dünden kalan "+d);if(b)e.push("Dökme "+b);if(n||e.length)s+=`${k[0]}: ${n||0}${e.length?" ("+e.join(", ")+")":""}\n`});
