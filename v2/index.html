@@ -21,7 +21,7 @@ h1{font-size:22px;margin:4px 0 8px;font-weight:800}
 .leg b{font-weight:900;background:none!important}.leg .y{color:#7a5800}.leg .r{color:#9b1c1c}.leg .b{color:#1e40af}.leg .v{color:#166534}
 .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px 0 8px;border-bottom:2px solid #c5ced9}
 .mini.two{grid-template-columns:1fr 1fr}
-.mini label{display:flex;flex-direction:column;font-size:14px;font-weight:800;gap:2px;min-width:0}
+.mini label{display:flex;flex-direction:column;justify-content:space-between;line-height:1.2;font-size:14px;font-weight:800;gap:2px;min-width:0}
 .mini input{width:100%;min-width:0;height:46px;font-size:22px;font-weight:700;padding:4px 6px;text-align:center;border:2px solid #6b7a8d;border-radius:8px;color:#111}
 .ac{padding:8px 0;font-size:18px;font-weight:700}
 .ac textarea{display:block;width:100%;margin-top:6px;font-size:20px;font-weight:600;padding:10px 12px;border:3px solid #6b7a8d;border-radius:10px;font-family:inherit;resize:vertical;min-height:0;color:#111;line-height:1.35}
@@ -35,7 +35,7 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
 <div class="row d"><span>Tarih</span><input id="tarih" type="date"></div>
 <div class="leg"><b class="y">R</b> = Revize · <b class="r">DK</b> = Dünden kalan · <b class="b">Ö</b> = Dökme (adet) · <b class="v">K</b> = Kutu</div>
 <div id="liste"></div><div class="sep"></div>
-<div class="mini"><label>Dokuma m²<input id="dok" inputmode="decimal"></label><label>Konfeksiyon m²<input id="konf" inputmode="decimal"></label><label>JYSK Stok m²<input id="stok" inputmode="decimal"></label></div>
+<div class="mini"><label>JYSK Dokuma m²<input id="dok" inputmode="decimal"></label><label>JYSK Konfeksiyon m²<input id="konf" inputmode="decimal"></label><label>JYSK Stok m²<input id="stok" inputmode="decimal"></label></div>
 <div class="mini two"><label>Çalışan sayısı<input id="kisi" inputmode="numeric"></label><label>Çalışma saati<input id="saat" inputmode="numeric"></label></div>
 <div class="ac"><span>Açıklama</span><textarea id="aciklama" rows="3" oninput="buyut(this)" placeholder="not (alt satıra geçebilirsiniz)"></textarea></div>
 <button onclick="location.href='https://wa.me/?text='+encodeURIComponent(metin())">WhatsApp'a gönder</button>
