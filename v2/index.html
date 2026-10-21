@@ -9,11 +9,12 @@ h1{font-size:22px;margin:4px 0 8px;font-weight:800}
 .row input{width:88px;min-height:48px;font-size:22px;font-weight:700;padding:8px 8px;text-align:right;border:2px solid #6b7a8d;border-radius:8px;color:#111}
 .d input{width:180px;text-align:left;font-size:20px}
 .m{padding:6px 0 7px;border-bottom:2px solid #c5ced9}
-.m .ad{font-size:16.5px;font-weight:800;margin-bottom:4px;line-height:1.2;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m .ad{font-size:16.5px;font-weight:800;margin-bottom:5px;line-height:1.2;color:#000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.cell{display:flex;flex-direction:column;gap:1px;min-width:0}
-.cell .lb{font-size:13.5px;font-weight:900;line-height:1.1;padding:0 2px}
-.cell input{width:100%;min-width:0;height:46px;font-size:24px;font-weight:800;padding:4px 2px;text-align:center;border:3px solid;border-radius:9px;color:#111;-webkit-appearance:none;appearance:none}
+.cell{display:flex;align-items:center;min-width:0;height:52px;border:3px solid;border-radius:10px;overflow:hidden}
+.cell .lb{flex:none;font-size:20px;font-weight:900;line-height:1;padding:0 3px 0 5px;pointer-events:none}
+.cell input{flex:1;width:100%;min-width:0;height:100%;font-size:24px;font-weight:800;padding:0 4px 0 0;text-align:right;border:0;outline:0;background:transparent;color:#111;-webkit-appearance:none;appearance:none}
+.cell:focus-within{box-shadow:0 0 0 3px #111}
 .y{background:#fff3c4;border-color:#a67c00!important}.r{background:#ffd0d0;border-color:#b42318!important}.b{background:#c8dbff;border-color:#1d4ed8!important}.v{background:#c6f0d4;border-color:#15803d!important}
 .cell .lb.y,.cap .y{color:#7a5800}.cell .lb.r,.cap .r{color:#9b1c1c}.cell .lb.b,.cap .b{color:#1e40af}.cell .lb.v,.cap .v{color:#166534}
 .cap{position:sticky;top:0;z-index:2;background:#fff;padding:5px 0 5px;border-bottom:3px solid #6b7a8d;margin-top:4px}
@@ -28,12 +29,7 @@ h1{font-size:22px;margin:4px 0 8px;font-weight:800}
 .ac{padding:8px 0;font-size:18px;font-weight:700}
 .ac textarea{display:block;width:100%;margin-top:6px;font-size:20px;font-weight:600;padding:10px 12px;border:3px solid #6b7a8d;border-radius:10px;font-family:inherit;resize:vertical;min-height:0;color:#111;line-height:1.35}
 .sep{height:4px}
-.sn{font-size:15px;font-weight:800;margin-top:4px;line-height:1.3;color:#111}.sn:empty{display:none}.sn .rv{color:#7a5800;background:#fff3c4;border-radius:5px;padding:0 4px}
-.top{border:3px solid #15803d;border-radius:12px;padding:8px;margin:8px 0 6px;background:#f3fbf6}
-.top h2{font-size:18px;margin:0 0 6px;font-weight:900}
-.tg{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-.tg div{background:#fff;border:2px solid #c5ced9;border-radius:8px;padding:3px 4px;min-width:0}.tg span{display:block;font-size:12px;font-weight:800;color:#374151}.tg b{font-size:19px;font-weight:900;display:block;white-space:nowrap}
-.trv{margin-top:6px;font-size:15px;font-weight:800;color:#7a5800;background:#fff3c4;border:2px solid #a67c00;border-radius:8px;padding:5px 8px}
+
 button{width:100%;margin-top:10px;font-size:20px;font-weight:800;padding:16px;border:0;border-radius:12px;background:#25d366;color:#fff;min-height:54px}
 button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8px;min-height:48px}
 #ok{text-align:center;font-size:15px;color:#15803d;min-height:20px;margin-top:6px;font-weight:700}
@@ -47,8 +43,7 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
   <div class="hc b"><b>Ö</b><i>Dökme<br>adet</i></div>
   <div class="hc v"><b>K</b><i>Kutu<br>kutu</i></div>
 </div>
-<div id="liste"></div>
-<div class="top"><h2>Toplam</h2><div class="tg"><div><span>Kutu K+DK</span><b id="tk">0</b></div><div><span>Dökme adet</span><b id="tb">0</b></div><div><span>Halı adet</span><b id="th">0</b></div><div><span>m²</span><b id="tm">0</b></div></div><div class="trv" id="trv">Revize: 0 kutu · 0 m² (toplama girmez)</div></div>
+<div id="liste"></div><div class="sep"></div>
 <div class="mini"><label>Dokuma m²<input id="dok" inputmode="decimal"></label><label>Konfeksiyon m²<input id="konf" inputmode="decimal"></label><label>JYSK Stok m²<input id="stok" inputmode="decimal"></label></div>
 <div class="mini two"><label>Çalışan sayısı<input id="kisi" inputmode="numeric"></label><label>Çalışma saati<input id="saat" inputmode="numeric"></label></div>
 <div class="ac"><span>Açıklama</span><textarea id="aciklama" rows="3" oninput="buyut(this)" placeholder="not (alt satıra geçebilirsiniz)"></textarea></div>
@@ -56,22 +51,14 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
 <button class="c" onclick="kopyala()">Metni kopyala</button><div id="ok"></div>
 </div><script>
 const K=[["BELLA 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["BELLA 160X230 30 LU JYSK","160x0230","PALET_26",30],["BELLA 200X300 25 Lİ","200x0300","PALET_71",25],["HELSİNKİ 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["HELSİNKİ 160230 35'Lİ JYSK","160x0230","PALET_26",35],["KOS 140X200 30 LU JYSK","140x0200","PALET_35",30],["KOS 160X230 24 LÜ JYSK","160x0230","PALET_26",24],["MAESTRO 140X200 48 Lİ JYSK","140x0200","PALET_35",48],["MAESTRO 160X230 48 Lİ JYSK","160x0230","PALET_26",48],["VİLLEPAL - 230x160 - 30 LU","230x0160","PALET_53",30]]; /* [Ad, Ebat, Kutu Kodu, hali/kutu] */
-const cell=(lbCls,lb,id,t)=>`<div class="cell"><span class="lb ${lbCls}">${lb}</span><input class="${lbCls}" id="${id}" inputmode="numeric" pattern="[0-9]*" title="${t}" aria-label="${t}"></div>`;
-liste.innerHTML=K.map((k,i)=>`<div class="m"><div class="ad">${k[0]}</div><div class="g4">${cell("y","R","y"+i,"Revize (kutu)")}${cell("r","DK","d"+i,"Dünden kalan (kutu)")}${cell("b","Ö","b"+i,"Dökme (adet)")}${cell("v","K","k"+i,"Kutu")}</div><div class="sn" id="s${i}"></div></div>`).join("");
-liste.addEventListener("input",hesap);
+const cell=(lbCls,lb,id,t)=>`<label class="cell ${lbCls}"><span class="lb ${lbCls}" aria-hidden="true">${lb}</span><input id="${id}" inputmode="numeric" pattern="[0-9]*" title="${t}" aria-label="${t}"></label>`;
+liste.innerHTML=K.map((k,i)=>`<div class="m"><div class="ad">${k[0]}</div><div class="g4">${cell("y","R","y"+i,"Revize (kutu)")}${cell("r","DK","d"+i,"Dünden kalan (kutu)")}${cell("b","Ö","b"+i,"Dökme (adet)")}${cell("v","K","k"+i,"Kutu")}</div></div>`).join("");
 function saatDoldur(){const m=g("vardiya").match(/(\d{1,2})[:.]?\d*\s*-\s*(\d{1,2})/);if(m){saat.value=((+m[2]-+m[1]+24)%24)||24}}
 const g=id=>document.getElementById(id).value.trim();
-const sy=id=>{const v=g(id).replace(",",".");const x=parseFloat(v);return isFinite(x)&&x>0?x:0};
-const em2=e=>{const m=String(e).match(/(\d+)\s*[xX]\s*(\d+)/);return m?(+m[1]/100)*(+m[2]/100):0};
-const tf=(x,d)=>x.toLocaleString("tr-TR",{maximumFractionDigits:d==null?2:d});
-function hesap(){let TK=0,TB=0,TH=0,TM=0,RK=0,RM=0;K.forEach((k,i)=>{const kt=sy("k"+i),dk=sy("d"+i),bk=sy("b"+i),rv=sy("y"+i),e=em2(k[1]),p=k[3];
-const kutu=kt+dk,hali=kutu*p+bk,m2=hali*e,rm2=rv*p*e;TK+=kutu;TB+=bk;TH+=hali;TM+=m2;RK+=rv;RM+=rm2;
-const el=document.getElementById("s"+i);let t="";if(kutu||bk)t=`= ${tf(hali)} halı · ${tf(m2)} m²`;if(rv)t+=`${t?" ":""}<span class="rv">Revize ${tf(rv)} = ${tf(rm2)} m² (hariç)</span>`;el.innerHTML=t});
-tk.textContent=tf(TK);tb.textContent=tf(TB);th.textContent=tf(TH);tm.textContent=tf(TM);trv.textContent=`Revize: ${tf(RK)} kutu · ${tf(RM)} m² (toplama girmez)`;return{TK,TB,TH,TM,RK,RM}}
 function buyut(t){t.style.height="auto";t.style.height=Math.max(t.scrollHeight+6,0)+"px"}
 function metin(){let s=`KUTULAMA ${g("tarih").split("-").reverse().join(".")} - Jysk\nVardiya: ${g("vardiya")||"-"}\n`;K.forEach((k,i)=>{const n=g("k"+i),y=g("y"+i),d=g("d"+i),b=g("b"+i),e=[];if(y)e.push("Revize "+y);if(d)e.push("Dünden kalan "+d);if(b)e.push("Dökme "+b);if(n||e.length)s+=`${k[0]}: ${n||0}${e.length?" ("+e.join(", ")+")":""}\n`});
 s+=`Dokuma: ${g("dok")||"-"} m²\nKonfeksiyon: ${g("konf")||"-"} m²\nStok: ${g("stok")||"-"} m²\nÇalışan: ${g("kisi")||"-"}\nSaat: ${g("saat")||"-"}\nAçıklama: ${g("aciklama")?g("aciklama").split(/\r?\n/).map(x=>x.trim()).filter(Boolean).join("\n"):"-"}`;return s}
 (function(){const el=document.getElementById("tarih");const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-1);while(d.getDay()===0)d.setDate(d.getDate()-1);const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),gun=String(d.getDate()).padStart(2,"0");el.value=y+"-"+m+"-"+gun;el.defaultValue=el.value;})();
 function kopyala(){const t=metin(),bitti=()=>{ok.textContent="Metin kopyalandı. WhatsApp'ta gruba yapıştırın.";};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(bitti,()=>eski(t))}else eski(t);function eski(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");bitti()}catch(e){ok.textContent="Kopyalanamadı"}a.remove()}}
-saatDoldur();hesap();
+saatDoldur();
 </script></body></html>
