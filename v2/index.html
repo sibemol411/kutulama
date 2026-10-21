@@ -36,7 +36,6 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
 </style></head><body><div class="k">
 <h1>Kutulama · Jysk</h1>
 <div class="row d"><span>Tarih</span><input id="tarih" type="date"></div>
-<div class="row d"><span>Vardiya</span><input id="vardiya" placeholder="08:00-20:00" oninput="saatDoldur()"></div>
 <div class="cap g4">
   <div class="hc y"><b>R</b><i>Revize<br>kutu</i></div>
   <div class="hc r"><b>DK</b><i>Dünden kalan<br>kutu</i></div>
@@ -53,12 +52,10 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
 const K=[["BELLA 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["BELLA 160X230 30 LU JYSK","160x0230","PALET_26",30],["BELLA 200X300 25 Lİ","200x0300","PALET_71",25],["HELSİNKİ 140X200 35 Lİ JYSK","140x0200","PALET_35",35],["HELSİNKİ 160230 35'Lİ JYSK","160x0230","PALET_26",35],["KOS 140X200 30 LU JYSK","140x0200","PALET_35",30],["KOS 160X230 24 LÜ JYSK","160x0230","PALET_26",24],["MAESTRO 140X200 48 Lİ JYSK","140x0200","PALET_35",48],["MAESTRO 160X230 48 Lİ JYSK","160x0230","PALET_26",48],["VİLLEPAL - 230x160 - 30 LU","230x0160","PALET_53",30]]; /* [Ad, Ebat, Kutu Kodu, hali/kutu] */
 const cell=(lbCls,lb,id,t)=>`<label class="cell ${lbCls}"><span class="lb ${lbCls}" aria-hidden="true">${lb}</span><input id="${id}" inputmode="numeric" pattern="[0-9]*" title="${t}" aria-label="${t}"></label>`;
 liste.innerHTML=K.map((k,i)=>`<div class="m"><div class="ad">${k[0]}</div><div class="g4">${cell("y","R","y"+i,"Revize (kutu)")}${cell("r","DK","d"+i,"Dünden kalan (kutu)")}${cell("b","Ö","b"+i,"Dökme (adet)")}${cell("v","K","k"+i,"Kutu")}</div></div>`).join("");
-function saatDoldur(){const m=g("vardiya").match(/(\d{1,2})[:.]?\d*\s*-\s*(\d{1,2})/);if(m){saat.value=((+m[2]-+m[1]+24)%24)||24}}
 const g=id=>document.getElementById(id).value.trim();
 function buyut(t){t.style.height="auto";t.style.height=Math.max(t.scrollHeight+6,0)+"px"}
-function metin(){let s=`KUTULAMA ${g("tarih").split("-").reverse().join(".")} - Jysk\nVardiya: ${g("vardiya")||"-"}\n`;K.forEach((k,i)=>{const n=g("k"+i),y=g("y"+i),d=g("d"+i),b=g("b"+i),e=[];if(y)e.push("Revize "+y);if(d)e.push("Dünden kalan "+d);if(b)e.push("Dökme "+b);if(n||e.length)s+=`${k[0]}: ${n||0}${e.length?" ("+e.join(", ")+")":""}\n`});
+function metin(){let s=`KUTULAMA ${g("tarih").split("-").reverse().join(".")} - Jysk\n`;K.forEach((k,i)=>{const n=g("k"+i),y=g("y"+i),d=g("d"+i),b=g("b"+i),e=[];if(y)e.push("Revize "+y);if(d)e.push("Dünden kalan "+d);if(b)e.push("Dökme "+b);if(n||e.length)s+=`${k[0]}: ${n||0}${e.length?" ("+e.join(", ")+")":""}\n`});
 s+=`Dokuma: ${g("dok")||"-"} m²\nKonfeksiyon: ${g("konf")||"-"} m²\nStok: ${g("stok")||"-"} m²\nÇalışan: ${g("kisi")||"-"}\nSaat: ${g("saat")||"-"}\nAçıklama: ${g("aciklama")?g("aciklama").split(/\r?\n/).map(x=>x.trim()).filter(Boolean).join("\n"):"-"}`;return s}
 (function(){const el=document.getElementById("tarih");const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-1);while(d.getDay()===0)d.setDate(d.getDate()-1);const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),gun=String(d.getDate()).padStart(2,"0");el.value=y+"-"+m+"-"+gun;el.defaultValue=el.value;})();
 function kopyala(){const t=metin(),bitti=()=>{ok.textContent="Metin kopyalandı. WhatsApp'ta gruba yapıştırın.";};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(bitti,()=>eski(t))}else eski(t);function eski(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");bitti()}catch(e){ok.textContent="Kopyalanamadı"}a.remove()}}
-saatDoldur();
 </script></body></html>
