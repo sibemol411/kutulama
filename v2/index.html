@@ -35,7 +35,7 @@ button.c{background:#d6dde7;color:#111;font-size:17px;padding:12px;margin-top:8p
 <div class="row d"><span>Tarih</span><input id="tarih" type="date"></div>
 <div class="leg"><b class="y">R</b> = Revize · <b class="r">DK</b> = Dünden kalan · <b class="b">Ö</b> = Dökme (adet) · <b class="v">K</b> = Kutu</div>
 <div id="liste"></div><div class="sep"></div>
-<div class="mini"><label>JYSK Dokuma m²<input id="dok" inputmode="decimal"></label><label>JYSK Konfeksiyon m²<input id="konf" inputmode="decimal"></label><label>JYSK Stok m²<input id="stok" inputmode="decimal"></label></div>
+<div class="mini two"><label>JYSK Dokuma m²<input id="dok" inputmode="decimal"></label><label>JYSK Konfeksiyon m²<input id="konf" inputmode="decimal"></label></div>
 <div class="mini two"><label>Çalışan sayısı<input id="kisi" inputmode="numeric"></label><label>Çalışma saati<input id="saat" inputmode="numeric"></label></div>
 <div class="ac"><span>Açıklama</span><textarea id="aciklama" rows="3" oninput="buyut(this)" placeholder="not (alt satıra geçebilirsiniz)"></textarea></div>
 <button onclick="location.href='https://wa.me/?text='+encodeURIComponent(metin())">WhatsApp'a gönder</button>
@@ -47,7 +47,7 @@ liste.innerHTML=K.map((k,i)=>`<div class="m"><div class="ad">${k[0]}</div><div c
 const g=id=>document.getElementById(id).value.trim();
 function buyut(t){t.style.height="auto";t.style.height=Math.max(t.scrollHeight+6,0)+"px"}
 function metin(){let s=`KUTULAMA ${g("tarih").split("-").reverse().join(".")} - Jysk\n`;K.forEach((k,i)=>{const n=g("k"+i),y=g("y"+i),d=g("d"+i),b=g("b"+i),e=[];if(y)e.push("Revize "+y);if(d)e.push("Dünden kalan "+d);if(b)e.push("Dökme "+b);if(n||e.length)s+=`${k[0]}: ${n||0}${e.length?" ("+e.join(", ")+")":""}\n`});
-s+=`Dokuma: ${g("dok")||"-"} m²\nKonfeksiyon: ${g("konf")||"-"} m²\nStok: ${g("stok")||"-"} m²\nÇalışan: ${g("kisi")||"-"}\nSaat: ${g("saat")||"-"}\nAçıklama: ${g("aciklama")?g("aciklama").split(/\r?\n/).map(x=>x.trim()).filter(Boolean).join("\n"):"-"}`;return s}
+s+=`Dokuma: ${g("dok")||"-"} m²\nKonfeksiyon: ${g("konf")||"-"} m²\nÇalışan: ${g("kisi")||"-"}\nSaat: ${g("saat")||"-"}\nAçıklama: ${g("aciklama")?g("aciklama").split(/\r?\n/).map(x=>x.trim()).filter(Boolean).join("\n"):"-"}`;return s}
 (function(){const el=document.getElementById("tarih");const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-1);while(d.getDay()===0)d.setDate(d.getDate()-1);const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),gun=String(d.getDate()).padStart(2,"0");el.value=y+"-"+m+"-"+gun;el.defaultValue=el.value;})();
 function kopyala(){const t=metin(),bitti=()=>{ok.textContent="Metin kopyalandı. WhatsApp'ta gruba yapıştırın.";};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(bitti,()=>eski(t))}else eski(t);function eski(t){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");bitti()}catch(e){ok.textContent="Kopyalanamadı"}a.remove()}}
 </script></body></html>
